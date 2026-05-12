@@ -1,10 +1,10 @@
-import {Button} from "react-bootstrap";
-import {Link} from "react-router";
+import { useNavigate} from "react-router-dom";
 
 export default function ButtonCard({linkTo, name}){
+    const navigate = useNavigate();
     return (
-        <Link to={linkTo}>
-            <Button>{name}</Button>
-        </Link>
+            <button onClick={()=>{
+                navigate(linkTo)
+            }} children={name}/>
     );
 }
