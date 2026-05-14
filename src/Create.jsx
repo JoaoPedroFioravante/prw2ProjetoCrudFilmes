@@ -1,14 +1,14 @@
+import axios from "axios";
 import { useState } from "react";
 import {useNavigate } from "react-router-dom";
 
-export default function Create({ setFilmes }) {
-  let anoAtual = new Date().getFullYear();
+export default function Create({filmes, setFilmes }) {
   const navigate = useNavigate();
   const [campos, setCampos] = useState({
-    id: "",
     nome: "",
-    ano: anoAtual,
     diretor: "",
+    imdb: 0, 
+    nacionalidade: ""
   });
   return (
     <div>
@@ -16,23 +16,25 @@ export default function Create({ setFilmes }) {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          setFilmes((i) => [...i, campos]);
+          if((filmes.filter((e) => campos.id == e.id)).length != 0){
+            alert("filme ja existente");
+            navigate("/home");
+            return;
+          }
+          axios.post("https://6a05127baa826ca75c0973d3.mockapi.io/web2/filmes/filmes", 
+            {
+              nome: campos.nome,
+              diretor: campos.diretor,
+              imdb: campos.imdb, 
+              nacionalidade: campos.nacionalidade
+            }
+          )
+          .then(()=> axios.get("https://6a05127baa826ca75c0973d3.mockapi.io/web2/filmes/filmes"))
+          .then(e => setFilmes(e.data))
+          .catch(e => console.log(e))
           navigate("/home");
         }}
-      >
-        <p>id do filme</p>
-        <input
-          required
-          type="text"
-          value={campos.id}
-          placeholder="digite o id do filme"
-          onChange={(e) => {
-            setCampos({
-              ...campos,
-              id: e.target.value,
-            });
-          }}
-        />
+      >   
         <p>nome do filme</p>
         <input
           required
@@ -45,19 +47,6 @@ export default function Create({ setFilmes }) {
             });
           }}
           placeholder="digite o nome do filme"
-        />
-        <p>ano de lançamento</p>
-        <input
-          type="number"
-          value={campos.ano}
-          onChange={(e) => {
-            setCampos({
-              ...campos,
-              ano: e.target.value,
-            });
-          }}
-          min={1900}
-          max={anoAtual}
         />
         <p>diretor</p>
         <input
@@ -72,6 +61,27 @@ export default function Create({ setFilmes }) {
           }}
           placeholder="digite o nome do diretor do filme"
         />
+        <p>nacionalidade</p>
+        <input
+          required
+          type="text"
+          value={campos.nacionalidade}
+          onChange={(e) => {
+            setCampos({
+              ...campos,
+              nacionalidade: e.target.value
+            });
+          }}
+          placeholder="digite a nacionalidade do filme"
+        />
+        <p>digite o imdb do filme</p>
+        <input type="number" min={0} max={100} name="" id="" value={campos.imdb} 
+        onChange={e=> {
+          setCampos({
+            ...campos, 
+            imdb: e.target.value
+          });
+        }}/>
 
         <button type="submit" children={"criar"} />
         <button type="button" children={"cancelar"} onClick={()=> navigate("/home")} />

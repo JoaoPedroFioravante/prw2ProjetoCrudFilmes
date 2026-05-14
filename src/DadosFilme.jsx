@@ -17,8 +17,9 @@ export default function DadosFilme({filmesLista}){
                 {filme.nome}
             </h2>
             <ul>
-                <li>{filme.ano}</li>
-                <li>{filme.diretor}</li>
+                <li>Diretor: {filme.diretor}</li>
+                <li>Nacionalidade: {filme.nacionalidade}</li>
+                <li>IMDB: {filme.imdb}</li>
             </ul>
 
             <button onClick={()=>{

@@ -1,10 +1,10 @@
 import {useNavigate, useParams} from "react-router-dom"
+import axios from "axios"
 
 export default function Delete({listaFilmes, setFilmes}){
     const obj = useParams();
     const navigate = useNavigate();
     const filme = listaFilmes.filter(e => e.id == obj.id)[0];
-    const filmes = listaFilmes.filter(e => e.id != obj.id);
     if(!filme){
         return(
             <h1>não encontrado</h1>
@@ -12,14 +12,17 @@ export default function Delete({listaFilmes, setFilmes}){
     }
     return(
         <div>
-        <h2>você deseja excluir o filme de id {filme.id}?</h2>
+        <h2>você deseja excluir o filme {filme.nome}?</h2>
         <ul>
-            <li>nome: {filme.nome}</li>
-            <li>ano de lançamento: {filme.ano}</li>
-            <li>diretor: {filme.diretor}</li>
+            <li>Diretor: {filme.diretor}</li>
+            <li>Nacionalidade: {filme.nacionalidade}</li>
+            <li>IMDB: {filme.imdb}</li>
         </ul>
         <button onClick={ ()=>{
-            setFilmes(filmes)
+            axios.delete(`https://6a05127baa826ca75c0973d3.mockapi.io/web2/filmes/filmes/${filme.id}`)
+            .then(()=> axios.get("https://6a05127baa826ca75c0973d3.mockapi.io/web2/filmes/filmes"))
+            .then(e=>setFilmes(e.data))
+            .catch(e => console.log(e))
             navigate("/home");
         }    
         } children={"excluir"}/>
