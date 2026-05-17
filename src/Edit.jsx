@@ -8,7 +8,9 @@ export default function Edit({ listaFilmes, mudarFilme }) {
   (e) => Number(e.id) === Number(id)
 );
   const navigate = useNavigate();
-  
+    if(!filme){
+    return <h1>Não Encontrado</h1>
+}
   const [campos, setCampos] = useState({
     id : filme.id,
     nome: filme.nome,
@@ -16,9 +18,7 @@ export default function Edit({ listaFilmes, mudarFilme }) {
     imdb: filme.imdb, 
     nacionalidade: filme.nacionalidade
   });
-  if(!filme){
-    return <h1>Não Encontrado</h1>
-}
+
   return (
    
     <div className="min-h-screen bg-zinc-800 p-5">
