@@ -5,7 +5,9 @@ import DadosFilme from "./DadosFilme";
 export default function Delete({listaFilmes, setFilmes}){
     const obj = useParams();
     const navigate = useNavigate();
-    const filme = listaFilmes.filter(e => e.id == obj.id)[0];
+      const filme = listaFilmes.find(
+  (e) => Number(e.id) === Number(id)
+);
     if(!filme){
         return(
             <h1>não encontrado</h1>

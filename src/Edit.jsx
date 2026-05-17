@@ -4,7 +4,9 @@ import axios from "axios";
 
 export default function Edit({ listaFilmes, mudarFilme }) {
   const id = useParams().id;
-  const filme = listaFilmes.filter((e) => e.id == id)[0];
+  const filme = listaFilmes.find(
+  (e) => Number(e.id) === Number(id)
+);
   const navigate = useNavigate();
   
   const [campos, setCampos] = useState({
