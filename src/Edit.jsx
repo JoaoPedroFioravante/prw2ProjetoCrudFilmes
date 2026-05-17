@@ -14,9 +14,12 @@ export default function Edit({ listaFilmes, mudarFilme }) {
     imdb: filme.imdb, 
     nacionalidade: filme.nacionalidade
   });
+  if(!filme){
+    return <h1>Não Encontrado</h1>
+}
   return (
    
-    <div className="h-screen bg-zinc-800 p-5">
+    <div className="min-h-screen bg-zinc-800 p-5">
       <h2 className=" text-center text:base sm:text-xl text-white lg:text-2xl xl:text-3xl">Preencha os dados do Filme desejado</h2>
       <form
         onSubmit={(e) => {
@@ -31,9 +34,11 @@ export default function Edit({ listaFilmes, mudarFilme }) {
           })
           .then(()=> axios.get("https://6a05127baa826ca75c0973d3.mockapi.io/web2/filmes/filmes")
           )
-          .then(e=> mudarFilme(e.data))
+          .then(e=> {mudarFilme(e.data)
+            navigate("/home");
+          })
           .catch(e=> console.log(e))
-          navigate("/home");
+          
         }}
         className="bg-white flex flex-col p-5"
       >

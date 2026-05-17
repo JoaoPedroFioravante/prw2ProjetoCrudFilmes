@@ -1,39 +1,6 @@
 import axios from "axios";
 
-// export default function Create({filmes, setFilmes }) {
-//   const navigate = useNavigate();
-//   const [campos, setCampos] = useState({
-//     nome: "",
-//     diretor: "",
-//     imdb: 0, 
-//     nacionalidade: ""
-//   });
-//   return (
-//     <div>
-//       <h2>preencha os dados e adicione um filme</h2>
-//       <form
-//         onSubmit={(e) => {
-//           e.preventDefault();
-//           if((filmes.filter((e) => campos.id == e.id)).length != 0){
-//             alert("filme ja existente");
-//             navigate("/home");
-//             return;
-//           }
-//           axios.post("https://6a05127baa826ca75c0973d3.mockapi.io/web2/filmes/filmes", 
-//             {
-//               nome: campos.nome,
-//               diretor: campos.diretor,
-//               imdb: campos.imdb, 
-//               nacionalidade: campos.nacionalidade
-//             }
-//           )
-//           .then(()=> axios.get("https://6a05127baa826ca75c0973d3.mockapi.io/web2/filmes/filmes"))
-//           .then(e => setFilmes(e.data))
-//           .catch(e => console.log(e))
-//           navigate("/home");
-//         }}
-//       >   
-        
+
 import { useState } from "react";
 import {useNavigate } from "react-router-dom";
 
@@ -46,11 +13,11 @@ export default function Create({ filmes, setFilmes}){
         nacionalidade: ""
       });
     return(
-    <div className="h-screen bg-zinc-800 p-5">
+    <div className="min-h-screen bg-zinc-800 p-5">
       <h2 className=" text-center text:base sm:text-xl text-white lg:text-2xl xl:text-3xl">Preencha os dados do Filme desejado</h2>
       <form
         onSubmit={(e) => {           e.preventDefault();
-          if((filmes.filter((e) => campos.id == e.id)).length != 0){
+          if((filmes.filter((e) => campos.nome == e.nome && campos.diretor == e.diretor)).length != 0){
              alert("filme ja existente");
             navigate("/home");
             return;
@@ -64,7 +31,9 @@ export default function Create({ filmes, setFilmes}){
             }
           )
           .then(()=> axios.get("https://6a05127baa826ca75c0973d3.mockapi.io/web2/filmes/filmes"))
-          .then(e => setFilmes(e.data))
+          .then(e => {setFilmes(e.data)
+            navigate("/home");
+          })
           .catch(e => console.log(e))
           navigate("/home");
         }}

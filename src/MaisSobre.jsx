@@ -18,5 +18,6 @@ export default function MaisSobre({listaFilmes}){
             <button className=" bg-yellow-500 font-semibold p-3 rounded" onClick={() => navigate(`/delete/${obj.id}`)}>excluir filme</button>
             </div>
         </div>
+        
     )
 }
