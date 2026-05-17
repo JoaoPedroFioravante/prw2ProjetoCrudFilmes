@@ -1,34 +1,18 @@
-import {useNavigate, useParams} from "react-router-dom"
 
-export default function DadosFilme({filmesLista}){
-    const obj = useParams();
-    const navigate = useNavigate();
-    const filme = filmesLista.filter(e => e.id == obj.id)[0];
-    if(!filme){
-        return(
-            <h1>
-                não encontrado
-            </h1>
-        )
-    }
+export default function DadosFilme({filme}){
     return(
-        <div>
-            <h2>
+        <div className="  bg-black text-white flex flex-col ">
+            <div className="mx-auto bg-zinc-950 w-full items-center flex flex-col">
+            <h2 className="font-bold underline mx-auto ">
                 {filme.nome}
             </h2>
             <ul>
-                <li>Diretor: {filme.diretor}</li>
-                <li>Nacionalidade: {filme.nacionalidade}</li>
-                <li>IMDB: {filme.imdb}</li>
+                <li><b>Diretor:</b> {filme.diretor}</li>
+                <li><b>Nacionalidade:</b> {filme.nacionalidade}</li>
+                <li><b>IMDB:</b> {filme.imdb}</li>
             </ul>
+            </div>
 
-            <button onClick={()=>{
-                navigate(`/edit/${filme.id}`)
-            }}  children={"editar filme"}/>
-
-            <button onClick={()=>{
-                navigate("/home")
-            }}  children={"home"}/>
         </div>
     )
 

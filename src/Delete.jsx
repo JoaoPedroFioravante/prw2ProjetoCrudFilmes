@@ -1,5 +1,6 @@
 import {useNavigate, useParams} from "react-router-dom"
 import axios from "axios"
+import DadosFilme from "./DadosFilme";
 
 export default function Delete({listaFilmes, setFilmes}){
     const obj = useParams();
@@ -11,14 +12,11 @@ export default function Delete({listaFilmes, setFilmes}){
         )
     }
     return(
-        <div>
-        <h2>você deseja excluir o filme {filme.nome}?</h2>
-        <ul>
-            <li>Diretor: {filme.diretor}</li>
-            <li>Nacionalidade: {filme.nacionalidade}</li>
-            <li>IMDB: {filme.imdb}</li>
-        </ul>
-        <button onClick={ ()=>{
+        <div className="text-sm sm:text-base  lg:text-lg xl:text-2xl h-screen bg-black">
+        <h2 className="text-white font-bold text-center">Deseja excluir o filme com seguintes dados? </h2>
+       <DadosFilme filme={filme}/>
+       <div className="flex gap-2 justify-center">
+        <button className="bg-yellow-500 font-semibold p-3 rounded" onClick={ ()=>{
             axios.delete(`https://6a05127baa826ca75c0973d3.mockapi.io/web2/filmes/filmes/${filme.id}`)
             .then(()=> axios.get("https://6a05127baa826ca75c0973d3.mockapi.io/web2/filmes/filmes"))
             .then(e=>setFilmes(e.data))
@@ -26,8 +24,8 @@ export default function Delete({listaFilmes, setFilmes}){
             navigate("/home");
         }    
         } children={"excluir"}/>
-        <button onClick={()=>navigate("/home")} children={"cancelar"}/>
-        
+        <button className=" bg-yellow-500 font-semibold p-3 rounded" onClick={()=>navigate("/home")} children={"cancelar"}/>
+        </div>
         </div>
     )
 }

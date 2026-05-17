@@ -7,6 +7,7 @@ import Delete from "./Delete.jsx";
 import DadosFilme from "./DadosFilme.jsx";
 import Banner from "./Banner.jsx";
 import axios from "axios";
+import MaisSobre from "./MaisSobre.jsx";
 
 function App() {
   const [filmes, setFilmes] = useState([]);
@@ -24,7 +25,7 @@ function App() {
           <Route path="home" element={<Home listafilmes={filmes} />} />
           <Route
             path="dados/:id"
-            element={<DadosFilme filmesLista={filmes} />}
+            element={<MaisSobre listaFilmes={filmes} />}
           />
           <Route path="create" element={<Create filmes={filmes} setFilmes={setFilmes} />} />
           <Route
