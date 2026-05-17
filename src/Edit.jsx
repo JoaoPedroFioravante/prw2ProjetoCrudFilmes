@@ -1,24 +1,41 @@
-import { useNavigate, useParams} from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function Edit({ listaFilmes, mudarFilme }) {
+
   const id = useParams().id;
-  const filme = listaFilmes.find(
-  (e) => Number(e.id) === Number(id)
-);
   const navigate = useNavigate();
-    if(!filme){
-    return <h1>Não Encontrado</h1>
-}
+
+  const filme = listaFilmes.find(
+    (e) => Number(e.id) === Number(id)
+  );
+
   const [campos, setCampos] = useState({
-    id : filme.id,
-    nome: filme.nome,
-    diretor: filme.diretor,
-    imdb: filme.imdb, 
-    nacionalidade: filme.nacionalidade
+    id: "",
+    nome: "",
+    diretor: "",
+    imdb: "",
+    nacionalidade: ""
   });
 
+  useEffect(() => {
+
+    if (filme) {
+      setCampos({
+        id: filme.id,
+        nome: filme.nome,
+        diretor: filme.diretor,
+        imdb: filme.imdb,
+        nacionalidade: filme.nacionalidade
+      });
+    }
+
+  }, [filme]);
+
+  if (!filme) {
+    return <h1>Carregando...</h1>;
+  }
   return (
    
     <div className="min-h-screen bg-zinc-800 p-5">
