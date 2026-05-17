@@ -15,8 +15,9 @@ export default function Edit({ listaFilmes, mudarFilme }) {
     nacionalidade: filme.nacionalidade
   });
   return (
-    <div>
-      <h2>alteração das informações do filme</h2>
+   
+    <div className="h-screen bg-zinc-800 p-5">
+      <h2 className=" text-center text:base sm:text-xl text-white lg:text-2xl xl:text-3xl">Preencha os dados do Filme desejado</h2>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -34,8 +35,9 @@ export default function Edit({ listaFilmes, mudarFilme }) {
           .catch(e=> console.log(e))
           navigate("/home");
         }}
+        className="bg-white flex flex-col p-5"
       >
-        <p>nome do filme</p>
+        <p className="content-start ">Nome do filme</p>
         <input
           required
           type="text"
@@ -47,6 +49,7 @@ export default function Edit({ listaFilmes, mudarFilme }) {
             });
           }}
           placeholder="digite o nome do filme"
+          className="border-solid border-2 border-yellow-500 rounded"
         />
         <p>diretor</p>
         <input
@@ -60,8 +63,9 @@ export default function Edit({ listaFilmes, mudarFilme }) {
             });
           }}
           placeholder="digite o nome do diretor do filme"
+          className="border-solid border-2 border-yellow-500 rounded"
         />
-       <p>nacionalidade</p>
+        <p>nacionalidade</p>
         <input
           required
           type="text"
@@ -73,6 +77,7 @@ export default function Edit({ listaFilmes, mudarFilme }) {
             });
           }}
           placeholder="digite a nacionalidade do filme"
+          className="border-solid border-2 border-yellow-500 rounded"
         />
         <p>digite o imdb do filme</p>
         <input type="number" min={0} max={100} name="" id="" value={campos.imdb} 
@@ -81,10 +86,13 @@ export default function Edit({ listaFilmes, mudarFilme }) {
             ...campos, 
             imdb: e.target.value
           });
-        }}/>
-
-        <button type="submit" children="enviar"/>
-        <button onClick={()=> navigate("/home")} children={"cancelar"}/>
+        }}
+        className="border-solid border-2 border-yellow-500 rounded"
+        />
+        <div className="flex justify-center gap-5 m-5">
+        <button type="submit" children={"salvar"} className="bg-yellow-500 font-semibold p-3 rounded" />
+        <button type="button" children={"cancelar"} onClick={()=> navigate("/home")} className="bg-yellow-500 font-semibold p-3 rounded" />
+        </div>
       </form>
     </div>
   );

@@ -1,4 +1,5 @@
 import {Link, Outlet} from "react-router-dom";
+import Footer from "./Footer";
 export default function Banner(){
     return(
     
@@ -9,6 +10,7 @@ export default function Banner(){
             <Link to={"/create"} className="bg-yellow-400 p-3 rounded ml-auto  text-black font-semibold" children={"Adicionar um filme épico"}/>
         </div>
         <Outlet />
+        <Footer/>
     </>
     )
 }
