@@ -4,7 +4,7 @@ import DadosFilme from "./DadosFilme";
 export default function MaisSobre({listaFilmes}){
     const obj = useParams();
       const filme = listaFilmes.find(
-  (e) => Number(e.id) === Number(id)
+  (e) => Number(e.id) === Number(obj.id)
 );
     const navigate = useNavigate();
     if(!filme){

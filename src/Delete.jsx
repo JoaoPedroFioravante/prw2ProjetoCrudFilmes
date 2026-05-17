@@ -6,7 +6,7 @@ export default function Delete({listaFilmes, setFilmes}){
     const obj = useParams();
     const navigate = useNavigate();
       const filme = listaFilmes.find(
-  (e) => Number(e.id) === Number(id)
+  (e) => Number(e.id) === Number(obj.id)
 );
     if(!filme){
         return(
